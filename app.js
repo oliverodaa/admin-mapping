@@ -10,6 +10,8 @@ var fs = require('fs');
 var join = require('path').join;
 var mongoose = require('mongoose');
 
+var port = process.env.PORT || 3000;
+
 /**
  * Config
  */
@@ -38,9 +40,20 @@ fs.readdirSync(models)
   .forEach(function(file) {require(join(models, file));});
 
 /**
+ * Open connection to DB
+ */
+require('./app/config.js');
+
+/**
  * Boostrap Routes
  */
 var routes = join(__dirname, 'app/routes');
 fs.readdirSync(routes)
   .filter(function(file) {return ~file.search(/^[^\.].*\.js$/);})
   .forEach(function(file) {require(join(routes, file));});
+
+function listen () {
+  if (app.get('env') === 'test') return;
+  app.listen(port);
+  console.log('Express app started on port ' + port);
+}
