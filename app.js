@@ -42,7 +42,7 @@ fs.readdirSync(models)
 /**
  * Open connection to DB
  */
-require('./app/config.js');
+// require('./app/config.js');
 
 /**
  * Boostrap Routes
