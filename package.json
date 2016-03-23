@@ -8,6 +8,7 @@
     "express": "latest",
     "ejs": "latest",
     "forever": "latest",
-    "moment":"latest"
+    "moment":"latest",
+    "mongoose":"latest"
   }
 }

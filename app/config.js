@@ -5,6 +5,7 @@ function connect() {
   var options = {server:{socketOptions:{keepAlive: 1}}};
   return mongoose.connect(dbURI, options).connection;
 }
+
 connect().on('error', console.log)
   .on('disconnected', connect)
   .once('open', function(){console.log("started");});
