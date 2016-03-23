@@ -50,7 +50,7 @@ fs.readdirSync(models)
 var routes = join(__dirname, 'app/routes');
 fs.readdirSync(routes)
   .filter(function(file) {return ~file.search(/^[^\.].*\.js$/);})
-  .forEach(function(file) {require(join(routes, file));});
+  .forEach(function(file) {require(join(routes, file))(app);});
 
 function listen () {
   if (app.get('env') === 'test') return;
