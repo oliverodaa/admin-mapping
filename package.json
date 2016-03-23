@@ -1,0 +1,13 @@
+{
+  "name": "admin-mapping",
+  "description": "API endpoints to deliver Admin Tables",
+  "license": "MIT",
+  "repository": "https://github.com/oliverodaa/admin-mapping.git",
+  "version": "1.0.0",
+  "dependencies": {
+    "express": "latest",
+    "ejs": "latest",
+    "forever": "latest",
+    "moment":"latest"
+  }
+}
