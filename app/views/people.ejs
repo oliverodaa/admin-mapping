@@ -1,3 +1,44 @@
 <% include header %>
 
+<!-- The Angular Code -->
+<script>
+// Simple GET request example:
+angular.module('peopleList', [])
+.controller('PeopleController', function($http) {
+  var peopleList = [];
+  $http({
+    method: 'GET',
+    url: 'http://localhost:3000/api/people'
+  }).then(function successCallback(response) {
+    peopleList = response;
+    console.log(response);
+    }, function errorCallback(response) {
+    peopleList = "ERROR ERROR RED ALERT"
+    });
+  this.peopleList = function() {
+    console.log("yo"+peopleList.toString());
+    return peopleList.data
+  }
+});
+
+
+</script>
+
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+
+
+<div ng-app="peopleList" ng-controller="PeopleController as p">
+  <ul>
+    <div ng-repeat="person in p.peopleList()">
+      <li>{{ person.name }}</li>
+    </div>
+  </ul>
+</div>
+
+
+  </div>
+</div>
+
 <% include footer %>
