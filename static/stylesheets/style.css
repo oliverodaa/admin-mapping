@@ -9,6 +9,15 @@ body {
   padding-bottom:50px;
 }
 
+.ui_grid_table {
+    width: 100%;
+    min-height: 250px;
+}
+
+.ui_grid_table .linkCell {
+  padding:4px;
+}
+
 .footer {
   color:white;
   background-color:#081F3F;

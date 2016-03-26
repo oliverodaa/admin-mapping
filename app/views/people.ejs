@@ -3,42 +3,46 @@
 <!-- The Angular Code -->
 <script>
 // Simple GET request example:
-angular.module('peopleList', [])
-.controller('PeopleController', function($http) {
-  var peopleList = [];
+angular.module('peopleList', ['ui.grid'])
+.controller('PeopleController', function($scope,$http) {
+  $scope.gridOptions = {};
+  $scope.gridOptions.data = [];
+  $scope.gridOptions.columnDefs = [
+    { name: 'name',
+      cellTemplate:'<div class="linkCell">' +
+        '<a href="/person/{{ row.entity.person_id }}">{{ row.entity.name }}</a>' +
+        '</div>'
+    },
+    {
+      field: 'gender'
+    }
+  ];
   $http({
     method: 'GET',
     url: 'http://localhost:3000/api/people'
   }).then(function successCallback(response) {
-    peopleList = response;
-    console.log(response);
+    $scope.gridOptions.data = response.data;
     }, function errorCallback(response) {
-    peopleList = "ERROR ERROR RED ALERT"
+    $scope.gridOptions.data = "ERROR ERROR RED ALERT";
     });
-  this.peopleList = function() {
-    console.log("yo"+peopleList.toString());
-    return peopleList.data
-  }
 });
-
-
 </script>
 
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <h1 class="title">People</h1>
+        <p>Below is the list of all people about whom we have logged information. Click on the person's name for more information about them.</p>
 
-<div class="row">
-  <div class="col-md-8 col-md-offset-2">
+  <div ng-app="peopleList" ng-controller="PeopleController as p">
+    <div ui-grid="gridOptions" class="ui_grid_table"></div>
+  </div>
 
 
-<div ng-app="peopleList" ng-controller="PeopleController as p">
-  <ul>
-    <div ng-repeat="person in p.peopleList()">
-      <li>{{ person.name }}</li>
+
     </div>
-  </ul>
-</div>
-
-
   </div>
 </div>
+
 
 <% include footer %>
