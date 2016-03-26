@@ -1,6 +1,6 @@
 var locals = {
         title: "Know Your University",
-        footerText: "Website made by Ollie O'Donnell in Berkeley, CA"
+        footerText: "Website made by <a href='http://ollie-odonnell.com'>Ollie O'Donnell</a> in Berkeley, CA"
       };
 
 module.exports = {
@@ -11,6 +11,7 @@ module.exports = {
     res.render('home',locals);
   },
   people: function(req, res, next) {
+    locals.title = 'People';
     res.render('people',locals);
   },
   positions: function(req, res, next) {
