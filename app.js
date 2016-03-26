@@ -47,13 +47,10 @@ fs.readdirSync(models)
 /**
  * Boostrap Routes
  */
-var routes = join(__dirname, 'app/routes');
-fs.readdirSync(routes)
-  .filter(function(file) {return ~file.search(/^[^\.].*\.js$/);})
-  .forEach(function(file) {require(join(routes, file))(app);});
+require('./app/routes/defaultRoute.js')(app);
 
 (function() {
   if (app.get('env') === 'test') return;
   app.listen(port);
   console.log('Express app started on port ' + port);
-})()
+})();
