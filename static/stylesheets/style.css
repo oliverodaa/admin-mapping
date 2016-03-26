@@ -1,0 +1,18 @@
+body {
+  font-family:'lato','Helvetica Neue',serif;
+  font-weight:400;
+  background:gray;
+}
+
+.content_space {
+  background-color:white;
+  padding-bottom:50px;
+}
+
+.footer {
+  color:white;
+  background-color:#081F3F;
+  padding-top:30px;
+  height:80px;
+  text-align:center;
+}
