@@ -4,6 +4,14 @@ body {
   background:gray;
 }
 
+a {
+  color:#5193B5;
+}
+
+a:hover {
+  color:#FCB326;
+}
+
 .content_space {
   background-color:white;
   padding-bottom:50px;
