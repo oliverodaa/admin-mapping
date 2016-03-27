@@ -11,7 +11,6 @@ module.exports = {
     res.render('home',locals);
   },
   people: function(req, res, next) {
-    locals.title = 'People';
     res.render('people',locals);
   },
   positions: function(req, res, next) {
