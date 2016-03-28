@@ -34,10 +34,10 @@ module.exports = app;
  */
 
 // Require all files in app/models
-var models = join(__dirname, 'app/models');
-fs.readdirSync(models)
-  .filter(function(file) {return ~file.search(/^[^\.].*\.js$/);})
-  .forEach(function(file) {require(join(models, file));});
+// var models = join(__dirname, 'app/models');
+// fs.readdirSync(models)
+//   .filter(function(file) {return ~file.search(/^[^\.].*\.js$/);})
+//   .forEach(function(file) {require(join(models, file));});
 
 /**
  * Open connection to DB

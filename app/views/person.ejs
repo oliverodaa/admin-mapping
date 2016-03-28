@@ -2,35 +2,56 @@
 
 <!-- The Angular Code -->
 <script>
+function filterHelper(data,key,value) {
+  // Returns only the data for which
+  // person_id matches the current page
+  rv = [];
+  for (var i=0;i<data.length;i++) {
+    if (data[i][key] === value) {
+      rv.push(data[i]);
+    }
+  }
+  return rv;
+}
 // Simple GET request example:
 angular.module('peopleList', ['ui.grid'])
 .controller('PeopleController', function($scope,$http) {
+
   $scope.person_id = window.location.pathname.split( '/' )[2];
-  $scope.gridOptions = {};
-  $scope.gridOptions.data = [];
-  $scope.gridOptions.columnDefs = [
-    {
-      field: 'person_id'
-    },
-    {
-      field: 'year'
-    },
-    {
-      field: 'salary_base',
-      name: 'Base Salary'
-    }
-  ];
-  $http({
-    method: 'GET',
-    url: 'https://script.google.com/macros/s/AKfycbwdPEaRIoYuTVSb5m5s3st9eo2dAUC2_IaWmM2oF6pfKPisV9Da/exec',
-    params: {
-            sheetName: "person_by_year"
-        }
-  }).then(function successCallback(response) {
-    $scope.datalog = JSON.stringify(response, null, 2);
-    $scope.gridOptions.data = response.data;
+  $http({type:'GET',url: 'https://script.google.com/macros/s/AKfycbwdPEaRIoYuTVSb5m5s3st9eo2dAUC2_IaWmM2oF6pfKPisV9Da/exec',params: {sheetName: "person_ids"}})
+  .then(function successCallback(response) {
+      $scope.person = filterHelper(response.data, "person_id", $scope.person_id)[0];
     }, function errorCallback(response) {
-    $scope.gridOptions.data = "ERROR ERROR RED ALERT";
+      $scope.person = "error";
+    });
+
+  $scope.person_by_year = {};
+  $scope.person_by_year.data = [];
+  $scope.person_by_year.columnDefs = [
+    {field: 'year'},
+    {field: 'salary_base', name: 'Base Salary'},
+    {field: 'salary_extra',name: 'Bonus Pay'}
+  ];
+  $http({type:'GET',url: 'https://script.google.com/macros/s/AKfycbwdPEaRIoYuTVSb5m5s3st9eo2dAUC2_IaWmM2oF6pfKPisV9Da/exec',params: {sheetName: "person_by_year"}})
+  .then(function successCallback(response) {
+      $scope.person_by_year.data = filterHelper(response.data, "person_id", $scope.person_id);
+    }, function errorCallback(response) {
+      $scope.person_by_year.data = "ERROR ERROR RED ALERT";
+    });
+
+  $scope.position_by_year = {};
+  $scope.position_by_year.data = [];
+  $scope.position_by_year.columnDefs = [
+    {field: 'year'},
+    {field: 'position_id', name: 'position'},
+    {field: 'org_id', name: 'organization'}
+  ];
+  $http({type:'GET',url: 'https://script.google.com/macros/s/AKfycbwdPEaRIoYuTVSb5m5s3st9eo2dAUC2_IaWmM2oF6pfKPisV9Da/exec',params: {sheetName: "positions_by_year"}})
+  .then(function successCallback(response) {
+      $scope.datalog = JSON.stringify(response, null, 2);
+      $scope.position_by_year.data = filterHelper(response.data, "person_id", $scope.person_id);
+    }, function errorCallback(response) {
+      $scope.position_by_year.data = "ERROR ERROR RED ALERT";
     });
 });
 </script>
@@ -40,10 +61,14 @@ angular.module('peopleList', ['ui.grid'])
     <div class="col-md-8 col-md-offset-2">
 
   <div ng-app="peopleList" ng-controller="PeopleController as p">
-    <h1 class="title">{{ person_id }}</h1>
-      <p>sadf</p>
+    <h1 class="title">{{ person.name }}</h1>
+      <p><strong>Gender: </strong>{{ person.gender }}</p>
 
-    <div ui-grid="gridOptions" class="ui_grid_table"></div>
+    <h3>Salary Over Time</h3>
+    <div ui-grid="person_by_year" class="ui_grid_table"></div>
+
+    <h3>Positions Over Time</h3>
+    <div ui-grid="position_by_year" class="ui_grid_table"></div>
 
     <br><br><br><br>
     <p>For debugging</p>

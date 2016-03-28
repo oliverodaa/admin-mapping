@@ -34,7 +34,7 @@ a:hover {
 
 .ui_grid_table {
     width: 100%;
-    min-height: 80vh;
+    min-height: 20vh;
 }
 
 .ui_grid_table .linkCell {
