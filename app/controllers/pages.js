@@ -13,6 +13,9 @@ module.exports = {
   people: function(req, res, next) {
     res.render('people',locals);
   },
+  person: function(req, res, next) {
+    res.render('person',locals);
+  },
   positions: function(req, res, next) {
     res.render('positions',locals);
   },

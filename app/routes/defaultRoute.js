@@ -8,7 +8,7 @@ module.exports = function (app) {
   app.get('/', pageController.home);
 
   app.get('/people', pageController.people);
-  app.get('/person/:id', pageController.people);
+  app.get('/person/:id', pageController.person);
 
   app.get('/positions', pageController.positions);
   app.get('/position/:id', pageController.people);
