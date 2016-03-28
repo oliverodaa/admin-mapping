@@ -21,7 +21,7 @@ angular.module('peopleList', ['ui.grid'])
     method: 'GET',
     url: 'https://script.google.com/macros/s/AKfycbwdPEaRIoYuTVSb5m5s3st9eo2dAUC2_IaWmM2oF6pfKPisV9Da/exec'
   }).then(function successCallback(response) {
-    $scope.datalog = response;
+    $scope.datalog = JSON.stringify(response, null, 2);
     $scope.gridOptions.data = response.data;
     }, function errorCallback(response) {
     $scope.gridOptions.data = "ERROR ERROR RED ALERT";

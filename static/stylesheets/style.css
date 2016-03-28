@@ -12,6 +12,21 @@ a:hover {
   color:#FCB326;
 }
 
+#nav {
+    z-index:10;
+}
+
+#nav.affix {
+    position:fixed;
+    top:0;
+    width:100%;
+    box-shadow:0 0 100px 0;
+}
+
+.nav-wrapper {
+    height:50px;
+}
+
 .content_space {
   background-color:white;
   padding-bottom:50px;
