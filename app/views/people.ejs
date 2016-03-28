@@ -19,7 +19,10 @@ angular.module('peopleList', ['ui.grid'])
   ];
   $http({
     method: 'GET',
-    url: 'https://script.google.com/macros/s/AKfycbwdPEaRIoYuTVSb5m5s3st9eo2dAUC2_IaWmM2oF6pfKPisV9Da/exec'
+    url: 'https://script.google.com/macros/s/AKfycbwdPEaRIoYuTVSb5m5s3st9eo2dAUC2_IaWmM2oF6pfKPisV9Da/exec',
+    params: {
+            sheetName: "person_ids"
+        }
   }).then(function successCallback(response) {
     $scope.datalog = JSON.stringify(response, null, 2);
     $scope.gridOptions.data = response.data;
