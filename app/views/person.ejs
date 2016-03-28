@@ -1,3 +1,60 @@
 <% include header %>
 
+<!-- The Angular Code -->
+<script>
+// Simple GET request example:
+angular.module('peopleList', ['ui.grid'])
+.controller('PeopleController', function($scope,$http) {
+  $scope.person_id = window.location.pathname.split( '/' )[2];
+  $scope.gridOptions = {};
+  $scope.gridOptions.data = [];
+  $scope.gridOptions.columnDefs = [
+    {
+      field: 'person_id'
+    },
+    {
+      field: 'year'
+    },
+    {
+      field: 'salary_base',
+      name: 'Base Salary'
+    }
+  ];
+  $http({
+    method: 'GET',
+    url: 'https://script.google.com/macros/s/AKfycbwdPEaRIoYuTVSb5m5s3st9eo2dAUC2_IaWmM2oF6pfKPisV9Da/exec',
+    params: {
+            sheetName: "person_by_year"
+        }
+  }).then(function successCallback(response) {
+    $scope.datalog = JSON.stringify(response, null, 2);
+    $scope.gridOptions.data = response.data;
+    }, function errorCallback(response) {
+    $scope.gridOptions.data = "ERROR ERROR RED ALERT";
+    });
+});
+</script>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+
+  <div ng-app="peopleList" ng-controller="PeopleController as p">
+    <h1 class="title">{{ person_id }}</h1>
+      <p>sadf</p>
+
+    <div ui-grid="gridOptions" class="ui_grid_table"></div>
+
+    <br><br><br><br>
+    <p>For debugging</p>
+    <pre>{{ datalog }}</pre>
+  </div>
+
+
+
+    </div>
+  </div>
+</div>
+
+
 <% include footer %>
