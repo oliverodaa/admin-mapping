@@ -19,8 +19,9 @@ angular.module('peopleList', ['ui.grid'])
   ];
   $http({
     method: 'GET',
-    url: 'http://localhost:3000/api/people'
+    url: 'https://script.google.com/macros/s/AKfycbwdPEaRIoYuTVSb5m5s3st9eo2dAUC2_IaWmM2oF6pfKPisV9Da/exec'
   }).then(function successCallback(response) {
+    $scope.datalog = response;
     $scope.gridOptions.data = response.data;
     }, function errorCallback(response) {
     $scope.gridOptions.data = "ERROR ERROR RED ALERT";
@@ -36,6 +37,10 @@ angular.module('peopleList', ['ui.grid'])
 
   <div ng-app="peopleList" ng-controller="PeopleController as p">
     <div ui-grid="gridOptions" class="ui_grid_table"></div>
+
+    <br><br><br><br>
+    <p>For debugging</p>
+    <pre>{{ datalog }}</pre>
   </div>
 
 

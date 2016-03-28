@@ -19,7 +19,7 @@ a:hover {
 
 .ui_grid_table {
     width: 100%;
-    min-height: 250px;
+    min-height: 80vh;
 }
 
 .ui_grid_table .linkCell {
